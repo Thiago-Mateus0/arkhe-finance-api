@@ -52,6 +52,7 @@ Acesse a documentação em: http://localhost:8000/docs
 ## Endpoints
 
 ### Transações
+
 | Método | Rota | Descrição |
 |--------|------|-----------|
 | GET | /transacoes | Lista todas as transações |
@@ -61,6 +62,7 @@ Acesse a documentação em: http://localhost:8000/docs
 | DELETE | /transacoes/{id} | Deleta uma transação |
 
 ### Categorias
+
 | Método | Rota | Descrição |
 |--------|------|-----------|
 | GET | /categorias | Lista todas as categorias |
@@ -68,6 +70,7 @@ Acesse a documentação em: http://localhost:8000/docs
 | DELETE | /categorias/{id} | Deleta uma categoria |
 
 ### Dashboard
+
 | Método | Rota | Descrição |
 |--------|------|-----------|
 | GET | /dashboard | Saldo, entradas, saídas e gastos por categoria |
