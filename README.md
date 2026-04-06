@@ -1,90 +1,92 @@
-Arkhé Finance API
+# Arkhé Finance API
 
-API REST para controle financeiro pessoal, desenvolvida com Python, FastAPI e SQLite.
+> API REST de controle financeiro pessoal — desenvolvida do zero por um estudante de Ciência da Computação.
 
-Permite gerenciar transações (entradas e saídas), categorias e visualizar um resumo financeiro consolidado.
+![Python](https://img.shields.io/badge/Python-3.x-blue?style=flat-square)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-green?style=flat-square)
+![SQLite](https://img.shields.io/badge/SQLite-lightgrey?style=flat-square)
+![Status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow?style=flat-square)
 
-Visão geral
+---
 
-A API foi projetada para centralizar o controle financeiro, oferecendo:
+## Sobre o projeto
 
-Registro de transações (entrada e saída)
-Organização por categorias
-Filtros por tipo, data e categoria
-Cálculo automático de saldo e resumo financeiro
-Tecnologias
-Python 3
-FastAPI
-SQLite
-Uvicorn
-Funcionalidades
-Transações
-Criar transações
-Listar transações
-Atualizar transações
-Deletar transações
-Filtrar por tipo (entrada / saída)
-Filtrar por categoria
-Filtrar por intervalo de datas
-Categorias
-Criar categorias
-Listar categorias
-Deletar categorias
-Dashboard
-Total de entradas
-Total de saídas
-Saldo atual
-Distribuição por categoria
-Estrutura do projeto
-.
-├── app
-│   ├── database.py
-│   └── routes
-│       ├── categorias.py
-│       ├── dashboard.py
-│       └── transacoes.py
-├── main.py
-├── .gitignore
-└── README.md
-Como executar
+O Arkhé Finance API centraliza o controle financeiro pessoal via HTTP. Permite registrar entradas e saídas, organizar por categorias, filtrar transações e visualizar um resumo financeiro consolidado.
+
+Desenvolvido como projeto de portfólio durante o primeiro semestre de Ciência da Computação, com foco em fundamentos reais de backend.
+
+---
+
+## Tecnologias
+
+| Ferramenta | Uso |
+|---|---|
+| Python 3 | Linguagem principal |
+| FastAPI | Framework da API |
+| SQLite | Banco de dados |
+| Uvicorn | Servidor ASGI |
+
+---
+
+## Como executar
+```bash
 git clone https://github.com/Thiago-Mateus0/arkhe-finance-api
 cd arkhe-finance-api
-
 python3 -m venv venv
 source venv/bin/activate
-
 pip install fastapi uvicorn
-uvicorn main:app --reload
+python -m uvicorn main:app --reload
+```
 
-A API estará disponível em:
+| URL | Descrição |
+|---|---|
+| `http://127.0.0.1:8000` | API |
+| `http://127.0.0.1:8000/docs` | Documentação interativa (Swagger) |
 
-http://127.0.0.1:8000
-http://127.0.0.1:8000/docs
-Endpoints
-Transações
-Método	Rota	Descrição
-GET	/transacoes	Lista todas
-GET	/transacoes?tipo=entrada	Filtra por tipo
-GET	/transacoes?categoria_id=1	Filtra por categoria
-GET	/transacoes?data_inicio=YYYY-MM-DD&data_fim=YYYY-MM-DD	Filtra por período
-POST	/transacoes	Cria nova
-PUT	/transacoes/{id}	Atualiza
-DELETE	/transacoes/{id}	Remove
-Categorias
-Método	Rota	Descrição
-GET	/categorias	Lista todas
-POST	/categorias	Cria nova
-DELETE	/categorias/{id}	Remove
-Dashboard
-Método	Rota	Descrição
-GET	/dashboard	Retorna resumo financeiro
-Exemplos
-Criar categoria
+---
+
+## Endpoints
+
+### Transações
+
+| Método | Rota | Descrição |
+|---|---|---|
+| `GET` | `/transacoes` | Lista todas |
+| `GET` | `/transacoes?tipo=entrada` | Filtra por tipo |
+| `GET` | `/transacoes?categoria_id=1` | Filtra por categoria |
+| `GET` | `/transacoes?data_inicio=YYYY-MM-DD&data_fim=YYYY-MM-DD` | Filtra por período |
+| `POST` | `/transacoes` | Cria nova |
+| `PUT` | `/transacoes/{id}` | Atualiza |
+| `DELETE` | `/transacoes/{id}` | Remove |
+
+### Categorias
+
+| Método | Rota | Descrição |
+|---|---|---|
+| `GET` | `/categorias` | Lista todas |
+| `POST` | `/categorias` | Cria nova |
+| `DELETE` | `/categorias/{id}` | Remove |
+
+### Dashboard
+
+| Método | Rota | Descrição |
+|---|---|---|
+| `GET` | `/dashboard` | Resumo financeiro completo |
+
+---
+
+## Exemplos
+
+**Criar categoria**
+```json
 {
   "nome": "Alimentação",
   "tipo": "saida"
 }
-Criar transação
+```
+
+**Criar transação**
+```json
 {
   "tipo": "saida",
   "valor": 120.50,
@@ -92,19 +94,51 @@ Criar transação
   "categoria_id": 1,
   "data": "2026-04-06"
 }
-Resposta inicial
+```
+
+**Resposta do dashboard**
+```json
 {
-  "mensagem": "Arkhé Finance API funcionando!"
+  "entradas": 3000.00,
+  "saidas": 850.00,
+  "saldo": 2150.00,
+  "gastos_por_categoria": [
+    { "nome": "Alimentação", "total": 450.00 },
+    { "nome": "Transporte", "total": 400.00 }
+  ]
 }
-Melhorias futuras
-Autenticação com JWT
-Paginação de resultados
-Testes automatizados
-Deploy da API
-Validações com Pydantic
-Autor
+```
 
-Thiago Mateus
-Estudante de Ciência da Computação com foco em desenvolvimento backend
+---
 
-Be water, my friend.
+## Estrutura do projeto
+arkhe-finance-api/
+├── app/
+│   ├── database.py
+│   └── routes/
+│       ├── transacoes.py
+│       ├── categorias.py
+│       └── dashboard.py
+├── main.py
+├── .gitignore
+└── README.md
+
+---
+
+## Melhorias futuras
+
+- [ ] Autenticação com JWT
+- [ ] Paginação de resultados
+- [ ] Testes automatizados
+- [ ] Deploy da API
+- [ ] Validações avançadas com Pydantic
+
+---
+
+## Autor
+
+**Thiago Mateus** — estudante de Ciência da Computação com foco em desenvolvimento backend.
+
+[![GitHub](https://img.shields.io/badge/GitHub-Thiago--Mateus0-black?style=flat-square&logo=github)](https://github.com/Thiago-Mateus0)
+
+> *"Be water, my friend."* — Bruce Lee
