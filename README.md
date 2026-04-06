@@ -2,16 +2,16 @@ Arkhé Finance API
 
 API REST para controle financeiro pessoal, desenvolvida com Python, FastAPI e SQLite.
 
-O projeto permite gerenciar entradas e saídas financeiras, categorias e visualizar um resumo consolidado dos dados.
+Permite gerenciar transações (entradas e saídas), categorias e visualizar um resumo financeiro consolidado.
 
 Visão geral
 
-A API foi projetada para centralizar o controle de finanças pessoais, oferecendo:
+A API foi projetada para centralizar o controle financeiro, oferecendo:
 
-registro de transações (entradas e saídas)
-organização por categorias
-filtros por tipo, data e categoria
-cálculo automático de saldo e resumo financeiro
+Registro de transações (entrada e saída)
+Organização por categorias
+Filtros por tipo, data e categoria
+Cálculo automático de saldo e resumo financeiro
 Tecnologias
 Python 3
 FastAPI
@@ -19,39 +19,35 @@ SQLite
 Uvicorn
 Funcionalidades
 Transações
-criar transações
-listar transações
-atualizar transações
-deletar transações
-filtrar por tipo (entrada / saida)
-filtrar por categoria
-filtrar por intervalo de datas
+Criar transações
+Listar transações
+Atualizar transações
+Deletar transações
+Filtrar por tipo (entrada / saída)
+Filtrar por categoria
+Filtrar por intervalo de datas
 Categorias
-criar categorias
-listar categorias
-deletar categorias
+Criar categorias
+Listar categorias
+Deletar categorias
 Dashboard
-total de entradas
-total de saídas
-saldo atual
-distribuição por categoria
+Total de entradas
+Total de saídas
+Saldo atual
+Distribuição por categoria
 Estrutura do projeto
-
 .
 ├── app
-│ ├── database.py
-│ └── routes
-│ ├── categorias.py
-│ ├── dashboard.py
-│ └── transacoes.py
+│   ├── database.py
+│   └── routes
+│       ├── categorias.py
+│       ├── dashboard.py
+│       └── transacoes.py
 ├── main.py
 ├── .gitignore
 └── README.md
-
 Como executar
-
 git clone https://github.com/Thiago-Mateus0/arkhe-finance-api
-
 cd arkhe-finance-api
 
 python3 -m venv venv
@@ -63,66 +59,52 @@ uvicorn main:app --reload
 A API estará disponível em:
 
 http://127.0.0.1:8000
-
 http://127.0.0.1:8000/docs
-
 Endpoints
 Transações
-
-GET /transacoes → Lista todas
-GET /transacoes?tipo=entrada → Filtra por tipo
-GET /transacoes?categoria_id=1 → Filtra por categoria
-GET /transacoes?data_inicio=YYYY-MM-DD&data_fim=YYYY-MM-DD → Filtra por período
-POST /transacoes → Cria nova
-PUT /transacoes/{id} → Atualiza
-DELETE /transacoes/{id} → Remove
-
+Método	Rota	Descrição
+GET	/transacoes	Lista todas
+GET	/transacoes?tipo=entrada	Filtra por tipo
+GET	/transacoes?categoria_id=1	Filtra por categoria
+GET	/transacoes?data_inicio=YYYY-MM-DD&data_fim=YYYY-MM-DD	Filtra por período
+POST	/transacoes	Cria nova
+PUT	/transacoes/{id}	Atualiza
+DELETE	/transacoes/{id}	Remove
 Categorias
-
-GET /categorias → Lista todas
-POST /categorias → Cria nova
-DELETE /categorias/{id} → Remove
-
+Método	Rota	Descrição
+GET	/categorias	Lista todas
+POST	/categorias	Cria nova
+DELETE	/categorias/{id}	Remove
 Dashboard
-
-GET /dashboard → Retorna resumo financeiro
-
+Método	Rota	Descrição
+GET	/dashboard	Retorna resumo financeiro
 Exemplos
-
-Criar categoria:
-
+Criar categoria
 {
-"nome": "Alimentação",
-"tipo": "saida"
+  "nome": "Alimentação",
+  "tipo": "saida"
 }
-
-Criar transação:
-
+Criar transação
 {
-"tipo": "saida",
-"valor": 120.50,
-"descricao": "Supermercado",
-"categoria_id": 1,
-"data": "2026-04-06"
+  "tipo": "saida",
+  "valor": 120.50,
+  "descricao": "Supermercado",
+  "categoria_id": 1,
+  "data": "2026-04-06"
 }
-
 Resposta inicial
-
 {
-"mensagem": "Arkhé Finance API funcionando!"
+  "mensagem": "Arkhé Finance API funcionando!"
 }
-
 Melhorias futuras
-autenticação com JWT
-paginação de resultados
-testes automatizados
-deploy da API
-validações mais robustas com Pydantic
+Autenticação com JWT
+Paginação de resultados
+Testes automatizados
+Deploy da API
+Validações com Pydantic
 Autor
 
 Thiago Mateus
 Estudante de Ciência da Computação com foco em desenvolvimento backend
-
-Projeto desenvolvido como parte da evolução prática em construção de APIs.
 
 Be water, my friend.
