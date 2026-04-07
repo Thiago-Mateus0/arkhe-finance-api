@@ -1,7 +1,11 @@
 from fastapi import APIRouter
-from app.database import get_db
 from pydantic import BaseModel
 from typing import Optional
+from app.database import get_db
+
+
+router = APIRouter()
+
 
 class TransacaoInput(BaseModel):
     tipo: str
@@ -9,11 +13,15 @@ class TransacaoInput(BaseModel):
     descricao: str
     categoria_id: int
     data: str
-    
-router = APIRouter()
+
 
 @router.get("/transacoes")
-def listar_transacoes(tipo: Optional[str] = None, categoria_id: Optional[int] = None, data_inicio: Optional[str] = None, data_fim: Optional[str] = None):
+def listar_transacoes(
+    tipo: Optional[str] = None,
+    categoria_id: Optional[int] = None,
+    data_inicio: Optional[str] = None,
+    data_fim: Optional[str] = None
+):
     conn = get_db()
     cursor = conn.cursor()
 
@@ -47,36 +55,42 @@ def listar_transacoes(tipo: Optional[str] = None, categoria_id: Optional[int] = 
     conn.close()
 
     return [dict(t) for t in transacoes]
+
+
 @router.post("/transacoes")
 def criar_transacao(transacao: TransacaoInput):
     conn = get_db()
     cursor = conn.cursor()
-    
+
     cursor.execute("""
         INSERT INTO transacoes (tipo, valor, descricao, categoria_id, data)
         VALUES (?, ?, ?, ?, ?)
     """, (transacao.tipo, transacao.valor, transacao.descricao, transacao.categoria_id, transacao.data))
-    
+
     conn.commit()
     conn.close()
-    
+
     return {"mensagem": "Transação criada com sucesso!"}
+
+
 @router.delete("/transacoes/{id}")
 def deletar_transacao(id: int):
     conn = get_db()
     cursor = conn.cursor()
-    
+
     row = cursor.execute("SELECT id FROM transacoes WHERE id = ?", (id,)).fetchone()
-    
+
     if row is None:
         conn.close()
         return {"erro": "Transação não encontrada"}
-    
+
     cursor.execute("DELETE FROM transacoes WHERE id = ?", (id,))
     conn.commit()
     conn.close()
-    
+
     return {"mensagem": "Transação deletada com sucesso!"}
+
+
 @router.put("/transacoes/{id}")
 def atualizar_transacao(id: int, transacao: TransacaoInput):
     conn = get_db()
