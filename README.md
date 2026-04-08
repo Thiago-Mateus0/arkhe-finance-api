@@ -12,48 +12,88 @@
 
 ## 🚀 Deploy e Acesso
 
-A API está em produção e pode ser acessada publicamente.
-
 | Ambiente | URL |
-|---|---|
+| :--- | :--- |
 | **API (Produção)** | [https://arkhe-finance-api.onrender.com](https://arkhe-finance-api.onrender.com) |
 | **Documentação (Swagger)** | [https://arkhe-finance-api.onrender.com/docs](https://arkhe-finance-api.onrender.com/docs) |
 
 ---
 
-## Sobre o projeto
+## Sobre o Projeto
 
 O Arkhé Finance API centraliza o controle financeiro pessoal via HTTP. Permite registrar entradas e saídas, organizar por categorias, filtrar transações e visualizar um resumo financeiro consolidado.
 
-Desenvolvido como projeto de portfólio durante o primeiro semestre de Ciência da Computação, com foco em fundamentos reais de backend e arquitetura de APIs.
-
 ---
 
-## Tecnologias
+## 🛠️ Tecnologias
 
 | Ferramenta | Uso |
-|---|---|
+| :--- | :--- |
 | **Python 3** | Linguagem principal |
 | **FastAPI** | Framework da API |
-| **SQLite** | Banco de dados (Persistência local) |
+| **SQLite** | Banco de dados |
 | **Uvicorn** | Servidor ASGI |
-| **Render** | Plataforma de Hospedagem (PaaS) |
+| **Render** | Plataforma de hospedagem |
 
 ---
 
-## Como executar localmente
+## 📋 Endpoints
+
+### Transações
+| Método | Rota | Descrição |
+| :--- | :--- | :--- |
+| GET | `/transacoes` | Lista todas |
+| GET | `/transacoes?tipo=entrada` | Filtra por tipo |
+| POST | `/transacoes` | Cria nova |
+| PUT | `/transacoes/{id}` | Atualiza |
+| DELETE | `/transacoes/{id}` | Remove |
+
+### Dashboard
+| Método | Rota | Descrição |
+| :--- | :--- | :--- |
+| GET | `/dashboard` | Resumo financeiro |
+
+---
+
+## 🧪 Como Executar
 
 ```bash
-# Clonar o repositório
-git clone [https://github.com/Thiago-Mateus0/arkhe-finance-api](https://github.com/Thiago-Mateus0/arkhe-finance-api)
+git clone https://github.com/Thiago-Mateus0/arkhe-finance-api
 cd arkhe-finance-api
-
-# Configurar ambiente virtual
 python3 -m venv venv
 source venv/bin/activate
-
-# Instalar dependências
 pip install fastapi uvicorn
-
-# Executar a API
 python -m uvicorn main:app --reload
+```
+
+---
+
+## 📁 Estrutura do Projeto
+
+```
+arkhe-finance-api/
+├── app/
+│   ├── database.py
+│   └── routes/
+│       ├── transacoes.py
+│       ├── categorias.py
+│       └── dashboard.py
+├── main.py
+├── .gitignore
+└── README.md
+```
+
+---
+
+## 🔄 Melhorias Futuras
+
+- [x] Deploy da API (Render)a
+- [ ] Migração para PostgreSQL
+- [ ] Autenticação com JWT
+- [ ] Testes automatizados com Pytest
+- [ ] Validações avançadas com Pydantic
+
+---
+
+**Autor:** Thiago Mateus — Estudante de Ciência da Computação
+> Be water, my friend
