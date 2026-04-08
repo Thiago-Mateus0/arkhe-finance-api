@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import Optional
 from app.database import get_db
@@ -60,15 +60,13 @@ def listar_transacoes(
 @router.post("/transacoes")
 def criar_transacao(transacao: TransacaoInput):
     conn = get_db()
-    cursor = conn.cursor()
-
-    cursor.execute("""
-        INSERT INTO transacoes (tipo, valor, descricao, categoria_id, data)
-        VALUES (?, ?, ?, ?, ?)
-    """, (transacao.tipo, transacao.valor, transacao.descricao, transacao.categoria_id, transacao.data))
-
-    conn.commit()
-    conn.close()
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""...""", (...))
+        conn.commit()
+        return {"mensagem": "Transação criada com sucesso!"}
+    finally:
+        conn.close()  # ← executa SEMPRE, mesmo se der erro
 
     return {"mensagem": "Transação criada com sucesso!"}
 
@@ -82,7 +80,7 @@ def deletar_transacao(id: int):
 
     if row is None:
         conn.close()
-        return {"erro": "Transação não encontrada"}
+        raise HTTPException(status_code=404, detail="Não encontrado")
 
     cursor.execute("DELETE FROM transacoes WHERE id = ?", (id,))
     conn.commit()

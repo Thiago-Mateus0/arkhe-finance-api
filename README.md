@@ -87,7 +87,7 @@ arkhe-finance-api/
 
 ## 🔄 Melhorias Futuras
 
-- [x] Deploy da API (Render)
+- [x] Deploy da API (Render)a
 - [ ] Migração para PostgreSQL
 - [ ] Autenticação com JWT
 - [ ] Testes automatizados com Pytest

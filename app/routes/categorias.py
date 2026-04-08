@@ -1,12 +1,16 @@
-from fastapi import APIRouter
+from fastapi import APIRouter,  HTTPException
 from pydantic import BaseModel
 from app.database import get_db
+from typing import Literal
+
 
 router = APIRouter()
 
+from typing import Literal
+
 class CategoriaInput(BaseModel):
     nome: str
-    tipo: str
+    tipo: Literal["entrada", "saida", "ambos"]
 
 @router.get("/categorias")
 def listar_categorias():
@@ -45,7 +49,7 @@ def deletar_categoria(id: int):
 
     if row is None:
         conn.close()
-        return {"erro": "Categoria não encontrada"}
+        raise HTTPException(status_code=404, detail="Não encontrado")
 
     cursor.execute("DELETE FROM categorias WHERE id = ?", (id,))
     conn.commit()
