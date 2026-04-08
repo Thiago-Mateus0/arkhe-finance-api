@@ -95,4 +95,9 @@ arkhe-finance-api/
 
 ---
 
+<<<<<<< HEAD
 **Autor:** Thiago Mateus — Estudante de Ciência da Computação
+=======
+**Autor:** Thiago Mateus — Estudante de Ciência da Computação
+> Be water, my friend
+>>>>>>> acb6f2ee83bb2a104fd13fe488bb1def4712c20e
