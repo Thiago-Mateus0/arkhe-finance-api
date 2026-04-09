@@ -60,14 +60,13 @@ def listar_transacoes(
 @router.post("/transacoes")
 def criar_transacao(transacao: TransacaoInput):
     conn = get_db()
-    try:
-        cursor = conn.cursor()
-        cursor.execute("""...""", (...))
-        conn.commit()
-        return {"mensagem": "Transação criada com sucesso!"}
-    finally:
-        conn.close()  # ← executa SEMPRE, mesmo se der erro
-
+    cursor = conn.cursor()
+    cursor.execute("""
+        INSERT INTO transacoes (tipo, valor, descricao, categoria_id, data)
+        VALUES (?, ?, ?, ?, ?)
+    """, (transacao.tipo, transacao.valor, transacao.descricao, transacao.categoria_id, transacao.data))
+    conn.commit()
+    conn.close()
     return {"mensagem": "Transação criada com sucesso!"}
 
 
